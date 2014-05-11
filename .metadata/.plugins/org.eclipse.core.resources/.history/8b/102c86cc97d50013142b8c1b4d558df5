@@ -1,0 +1,25 @@
+package com.moe.mygdxgame;
+
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+public class Grid {
+int cellWidth, cellHeight, width, height;
+enum CellColor {RED, GREEN, BLUE, BLACK, WHITE, YELLOW, ORANGE, PURPLE, GREY}
+
+	public Grid(int cellWidth, int cellHeight, int width, int height) {
+		this.cellWidth = cellWidth;
+		this.cellHeight = cellHeight;
+		this.width = width;
+		this.height = height;
+	}
+	
+	public void drawCell(int x, int y, ShapeRenderer renderer, CellColor color) {
+		if (x < width && y < height) {
+			
+		}
+	}
+
+	private void fillCell(int x, int y, ShapeRenderer renderer, CellColor color) {
+		
+	}
+}

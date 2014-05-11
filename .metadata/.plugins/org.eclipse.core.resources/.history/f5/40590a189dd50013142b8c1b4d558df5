@@ -1,0 +1,50 @@
+package com.moe.mygdxgame;
+
+public class Life {
+CellArray cells;
+	
+	public Life(CellArray cells) {
+		this.cells = cells;
+	}
+	
+	public void step() {
+		
+	}
+	
+	private void updateCell(int x, int y) {
+		int count = getNeighbors(x, y);
+		if (cells.cell[x][y] == 0) {
+			
+		} else {
+			
+		}
+	}
+	
+	private int getNeighbors(int x, int y) {
+		int count = 0;
+		if (x > 0 && x < cells.width) {
+			if (y > 0 && y < cells.height) {
+				count += cellValue(x-1, y-1);
+				count += cellValue(x, y-1);
+				count += cellValue(x+1, y-1);
+				count += cellValue(x, y-1);
+				count += cellValue(x, y+1);
+				count += cellValue(x-1, y+1);
+				count += cellValue(x, y+1);
+				count += cellValue(x+1, y+1);
+			}
+		}
+		return count;
+	}
+	
+	private int cellValue(int x, int y) {
+		if ((x > 0 && x < cells.width) && (y > 0 && y < cells.height)) {
+			if (cells.cell[x][y] != 0)
+				return 1;
+			else 
+				return 0;
+		} else {
+			return 0;
+		}
+	}
+}

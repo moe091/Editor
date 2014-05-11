@@ -1,0 +1,32 @@
+package com.moe.mygdxgame;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector3;
+
+public class Input {
+static boolean inputDown = false;
+static Vector3 clickCoords = new Vector3();
+
+	public static void process(WarScreen screen) {
+		if (!inputDown) {
+			if (Gdx.input.isTouched()) {
+				inputDown = true;
+				clickCoords.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+				screen.getClick(clickCoords);
+			} else {
+				
+			}
+		} else {
+			if (Gdx.input.isTouched()) {
+				//drag/hold
+			} else {
+				inputDown = false;
+			}
+		}
+		
+		if (Gdx.input.isKeyPressed(Keys.S)) {
+			screen.playing = !screen.playing;
+		}
+	}
+}

@@ -1,0 +1,108 @@
+package com.moe.mygdxgame;
+
+public class Life {
+CellArray cells;
+	
+	public Life(CellArray cells) {
+		this.cells = cells;
+	}
+	
+	public void step() {
+		for (int x = 0; x < cells.width; x++) {
+			for (int y = 0; y < cells.height; y++) {
+				if (cells.cell[x][y] >= 0)
+					updateCell(x, y);
+				else
+					updateCell2(x, y);
+			}
+		}
+		cells.swap(); 
+	}
+	
+	private void updateCell(int x, int y) {
+		int count = getNeighbors(x, y);
+		if (cells.cell[x][y] != 1) {
+			if (count == 3) 
+				cells.nextcell[x][y] = 1;
+		} else {
+			if (count <= 1)
+				cells.nextcell[x][y] = 2;
+			else if (count >= 4)
+				cells.nextcell[x][y] = 2;
+			else
+				cells.nextcell[x][y] = 1;
+		}
+	}
+	
+	private void updateCell2(int x, int y) {
+		int count = getNeighbors2(x, y);
+		if (cells.cell[x][y] == -1) {
+			if (count == -2 || count == -3)
+				cells.cell[x][y] = -1;
+			else if (count <= -4)
+				cells.nextcell[x][y] = -2;
+			else
+				cells.nextcell[x][y] = -2;
+		} else {
+			if (count == -3) {
+				cells.nextcell[x][y] = -1;
+			}
+		}
+	}
+	
+	private int getNeighbors(int x, int y) {
+		int count = 0;
+		if (x > 0 && x < cells.width) {
+			if (y > 0 && y < cells.height) {
+				count += cellValue(x-1, y-1);
+				count += cellValue(x, y-1);
+				count += cellValue(x+1, y-1);
+				count += cellValue(x-1, y);
+				count += cellValue(x+1, y);
+				count += cellValue(x-1, y+1);
+				count += cellValue(x, y+1);
+				count += cellValue(x+1, y+1);
+			}
+		}
+		return count;
+	}
+	
+	private int getNeighbors2(int x, int y) {
+		int count = 0;
+		if (x > 0 && x < cells.width) {
+			if (y > 0 && y < cells.height) {
+				count += cellValue2(x-1, y-1);
+				count += cellValue2(x, y-1);
+				count += cellValue2(x+1, y-1);
+				count += cellValue2(x-1, y);
+				count += cellValue2(x+1, y);
+				count += cellValue2(x-1, y+1);
+				count += cellValue2(x, y+1);
+				count += cellValue2(x+1, y+1);
+			}
+		}
+		return count;
+	}
+	
+	private int cellValue(int x, int y) {
+		if ((x > 0 && x < cells.width) && (y > 0 && y < cells.height)) {
+			if (cells.cell[x][y] == 1)
+				return 1;
+			else 
+				return 0;
+		} else {
+			return 0;
+		}
+	}
+	
+	private int cellValue2(int x, int y) {
+		if ((x > 0 && x < cells.width) && (y > 0 && y < cells.height)) {
+			if (cells.cell[x][y] == -1)
+				return -1;
+			else 
+				return 0;
+		} else {
+			return 0;
+		}
+	}
+}

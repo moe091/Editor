@@ -1,0 +1,29 @@
+package com.moe.mygdxgame;
+
+public class DriverOne {
+CellArray cells;
+
+	public DriverOne(CellArray cells) {
+		this.cells = cells;
+		init1();
+	}
+	
+	public void init1() {
+		for (int x = 0; x < cells.width; x++) {
+			for (int y = 0; y < cells.height; y++) {
+				cells.cells[x][y].g = ((float) x / cells.width);
+				cells.cells[x][y].b = ((float) y / cells.height);
+			}
+		}
+	}
+	
+	public void step() {
+		for (int x = 0; x < cells.width; x++) {
+			for (int y = 0; y < cells.height; y++) {
+				cells.cells[x][y].g = cells.cells[cells.width-x][cells.height-y].b;
+				cells.cells[x][y].b = cells.cells[cells.width-x][cells.height-y].g;
+				cells.cells[x][y].r = 1;
+			}
+		}
+	}
+}

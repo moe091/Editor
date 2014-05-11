@@ -1,0 +1,8 @@
+package com.moe.mygdxgame;
+
+public class Input {
+
+	public static void process(WarScreen screen) {
+		
+	}
+}

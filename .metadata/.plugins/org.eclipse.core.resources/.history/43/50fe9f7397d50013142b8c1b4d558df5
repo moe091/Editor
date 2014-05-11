@@ -1,0 +1,12 @@
+package com.moe.mygdxgame;
+
+public class Grid {
+int cellWidth, cellHeight, width, height;
+
+	public Grid(int cellWidth, int cellHeight, int width, int height) {
+		this.cellWidth = cellWidth;
+		this.cellHeight = cellHeight;
+		this.width = width;
+		this.height = height;
+	}
+}

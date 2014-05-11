@@ -1,0 +1,14 @@
+package com.moe.mygdxgame;
+
+public class DriverOne {
+CellArray cells;
+
+	public DriverOne(CellArray cells) {
+		this.cells = cells;
+		init1();
+	}
+	
+	public void init1() {
+		
+	}
+}

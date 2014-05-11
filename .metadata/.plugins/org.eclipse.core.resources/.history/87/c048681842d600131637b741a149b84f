@@ -1,0 +1,48 @@
+package com.moe.mygdxgame;
+
+public class DriverOne {
+CellArray cells;
+
+	public DriverOne(CellArray cells) {
+		this.cells = cells;
+		init1();
+	}
+	
+	public void init1() {
+		for (int x = 0; x < cells.width; x++) {
+			for (int y = 0; y < cells.height; y++) {
+				cells.cells[x][y].g = ((float) x / cells.width);
+				cells.cells[x][y].b = ((float) y / cells.height);
+			}
+		}
+	}
+	
+	public void step() {
+		for (int x = 0; x < cells.width; x++) {
+			for (int y = 0; y < cells.height; y++) {
+				cells.nextCells[x][y].g = (nextCell(x, y, x / 10, y / 10).g + cells.cells[x][y].g) / 2;
+				cells.nextCells[x][y].b = (nextCell(x, y, x / 2, y / 2).b + cells.cells[x][y].b) / 2;
+			}
+		}
+		cells.swapCells();
+	}
+	
+	private Cell nextCell(int x, int y, int dx, int dy) {
+		int nx, ny;
+		if (x + dx >= cells.width - 1) 
+			nx = (x + dx) % cells.width;
+		else
+			nx = x + dx;
+		
+		if (y + dy >= cells.height - 1)
+			ny = (y + dy) & cells.height;
+		else 
+			ny = y + dy;
+		
+		if (nx >= cells.width - 1)
+			nx = cells.width - 2;
+		if (ny >= cells.height - 1)
+			ny = cells.height - 2;
+		return cells.cells[nx][ny];
+	}
+}

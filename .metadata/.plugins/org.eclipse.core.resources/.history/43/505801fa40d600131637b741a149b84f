@@ -1,0 +1,108 @@
+package com.moe.mygdxgame;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector3;
+
+public class WarScreen implements Screen {
+ShapeRenderer shapeRenderer;
+GdxGame game;
+OrthographicCamera camera;
+Grid grid;
+CellArray cells;
+Life life;
+float time = 1;
+float updateTime = 0.5f;
+boolean playing = false;
+DriverOne driver;
+	public WarScreen(GdxGame game) {
+		this.game = game;
+		camera = new OrthographicCamera(1000, 600);
+		camera.translate(500, 300);
+		camera.update();
+		shapeRenderer = new ShapeRenderer();
+		cells = new CellArray(10, 120,  72);
+		driver = new DriverOne(cells);
+		grid = new Grid(10, 120, 72);
+		life = new Life(cells);
+	}
+	
+	@Override
+	public void render(float delta) {
+		time+= delta;
+		camera.update();
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		grid.drawCells(cells, shapeRenderer);
+		shapeRenderer.end();
+		Input.process(this);
+		if (playing && time > updateTime) {
+			update();
+		}
+		
+	}
+	
+	private void update() {
+		time = 0;
+		//life.step();
+		driver.step();
+	}
+
+	public void getClick(Vector3 click) {
+		camera.unproject(click);
+		cells.setCell(click.x, click.y, 1);
+	}
+	
+	public void getClick2(Vector3 click) {
+		camera.unproject(click);
+		cells.setCell(click.x, click.y, -1);
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clear() {
+		cells.clear();
+		playing = false;
+		
+	}
+
+	
+
+}

@@ -1,0 +1,41 @@
+package com.moe.mygdxgame;
+
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+
+public class Grid {
+int cellSize, width, height;
+public static final int WHITE = 0, RED = 1, BLUE = 2, GREEN = 3;
+
+	public Grid(int cellSize, int width, int height) {
+		this.cellSize = cellSize;
+		this.width = width;
+		this.height = height;
+	}
+	
+	public void drawCellArray(CellArray arr, ShapeRenderer renderer) {
+		for (int x = 0; x < arr.width; x++) {
+			for (int y = 0; y < arr.height; y++) {
+				drawCell(x, y, renderer, arr.cell[x][y]);
+			}
+		}
+	}
+	private void drawCell(int x, int y, ShapeRenderer renderer, int color) {
+		if (x < width && y < height) {
+			setColor(renderer,  color);
+			renderer.rect(x * cellSize + 1, y * cellSize + 1, cellSize - 2, cellSize - 2);
+		}
+	}
+
+	private void setColor(ShapeRenderer renderer, int color) {
+		switch (color) {
+		case WHITE: renderer.setColor(0.5f, 0.5f, 0.5f, 1); break;
+		case RED: renderer.setColor(0.6f, 0.1f, 0.1f, 1); break;
+		case BLUE: renderer.setColor(0.1f, 0.1f, 0.6f, 1); break;
+		case GREEN: renderer.setColor(0, 1, 0, 1); break;
+		}
+		
+	}
+
+	
+}

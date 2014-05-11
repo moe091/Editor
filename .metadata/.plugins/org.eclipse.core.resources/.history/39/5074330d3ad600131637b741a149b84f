@@ -1,0 +1,7 @@
+package com.moe.mygdxgame;
+
+public class Cell {
+	float r, g, b;
+	int va;
+	
+}

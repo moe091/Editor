@@ -1,0 +1,57 @@
+package com.moe.gui;
+
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
+
+/**
+ * An Input component, recieves input and passes it on to listeners via a callback
+ * @author moe
+ *
+ */
+
+public abstract class Component {
+	enum eventType {
+		DOWN, DRAG, UP
+	}
+	public float dragX, dragY, downX, downY;
+	public String key;
+	
+	private Sprite sprite;
+	private Container container;
+	private Array<ComponentListener> listeners = new Array<ComponentListener>();
+	
+	
+	/**
+	 * Registers the listener with this component, meaning that the listeners inputEvent() method will be called whenever this
+	 * Component recieves an input event.
+	 * @param cListener
+	 */
+	public void registerListener(ComponentListener cListener) {
+		listeners.add(cListener);
+	}
+	
+	
+	/**
+	 * Draw the component
+	 * @param batch
+	 */
+	public void render(SpriteBatch batch) {
+		sprite.draw(batch);
+	}
+	
+	public boolean checkTouch(float x, float y) {
+		if (sprite.getBoundingRectangle().contains(x, y)) {
+			inputEvent();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void inputEvent() {
+		for (int i = 0; i < listeners.size; i++) {
+			listeners.get(i).inputEvent(this);
+		}
+	}
+}

@@ -1,0 +1,17 @@
+package com.moe.mygdxgame;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector3;
+
+public class Input {
+static boolean inputDown = false;
+
+	public static void process(WarScreen screen) {
+		if (!inputDown) {
+			if (Gdx.input.isTouched()) {
+				inputDown = true;
+				screen.getClick(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+package com.moe.gui;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
+public interface Component {
+
+	/**
+	 * Draws the component sprite
+	 * @param batch
+	 */
+	public void render(SpriteBatch batch);
+	
+	/**
+	 * called when an input event happens, dispatches events to the components listeners
+	 */
+	private void inputEvent();
+}

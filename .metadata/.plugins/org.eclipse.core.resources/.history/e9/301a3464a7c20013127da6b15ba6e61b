@@ -1,0 +1,6 @@
+package com.moe.gui;
+
+public interface ComponentListener {
+
+	public inputEvent(Component component);
+}

@@ -1,0 +1,76 @@
+package com.moe.mygdxgame;
+
+public class CellArray {
+int[][] cell;
+int[][] nextcell;
+Cell[][] cells;
+Cell[][] nextCells;
+int width;
+int height;
+int size;
+	public CellArray(int size, int width, int height) {
+		this.width = width;
+		this.height = height;
+		this.size = size;
+		cell = new int[width][height];
+		nextcell = new int[width][height];
+		
+		cells = new Cell[width][height];
+		nextCells = new Cell[width][height];
+		initCells();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				cell[x][y] = 0;
+			}
+		}
+	}
+	private void initCells() {
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				cells[x][y] = new Cell();
+				nextCells[x][y] = new Cell();
+			}
+		}
+	}
+	
+	public void setCell(float x, float y, int num) {
+		int xloc = (int) x / size;
+		int yloc = (int) y / size;
+		if (xloc < width && yloc < height) {
+			cell[xloc][yloc] = num;
+		}
+	}
+
+	public void swap() {
+		cell = nextcell;
+		nextcell = new int[width][height];
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (cell[x][y] != 0) {
+					nextcell[x][y] = -2;
+				}
+			}
+		}
+		
+	}
+	
+	public void swapCells() {
+		cells = nextCells;
+		nextCells = new Cell[width][height];
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (cell[x][y] != 0) {
+					nextcell[x][y] = -2;
+				}
+			}
+		}
+		
+	}
+
+	public void clear() {
+		cell = new int[width][height];
+		nextcell = new int[width][height];
+		
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.moe.mygdxgame;
+
+public class CellArray {
+int[][] cell;
+
+	public CellArray(int width, int height) {
+		cell = new int[width][height];
+		
+	}
+}

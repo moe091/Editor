@@ -1,0 +1,70 @@
+package com.moe.mygdxgame;
+
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+
+public class WarScreen implements Screen {
+ShapeRenderer shapeRenderer;
+GdxGame game;
+OrthographicCamera camera;
+Grid grid;
+CellArray cells;
+
+	public WarScreen(GdxGame game) {
+		this.game = game;
+		camera = new OrthographicCamera(800, 480);
+		camera.translate(400, 240);
+		camera.update();
+		shapeRenderer = new ShapeRenderer();
+		cells = new CellArray(40,  24);
+		grid = new Grid(20, 40, 24);
+	}
+	
+	@Override
+	public void render(float delta) {
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		grid.drawCellArray(cells, shapeRenderer);
+		shapeRenderer.end();
+		Input.process();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
